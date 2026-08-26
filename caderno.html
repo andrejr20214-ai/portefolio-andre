@@ -22,17 +22,10 @@
   <section style="padding-top: 0; border-top: none;">
     <div class="wrap" style="max-width: 800px;">
       
-      <!-- Acesso Direto ao Notion -->
-      <div style="margin-bottom: 40px; display: flex; justify-content: space-between; align-items: center; background: var(--surface); padding: 15px 20px; border-radius: 12px; border: 1px solid var(--line);">
-        <span style="font-size: 14px; color: var(--muted);">Back Office (Notion) Ativo</span>
-        <a href="https://app.notion.com/p/3c872fbf61168037bb7be7b06be1cbf5?v=3c872fbf6116801cb20e000c8f37dc40" target="_blank" class="btn" style="font-size: 13px; padding: 8px 16px;">
-          <i class="fa-solid fa-pen-to-square" style="margin-right: 8px;"></i> Escrever no Notion ↗
-        </a>
-      </div>
 
       <!-- Contentor onde os artigos do Notion/JSON vão aparecer -->
       <div id="notionArticlesList" style="display: flex; flex-direction: column; gap: 25px;">
-        <p style="color: var(--muted); text-align: center; padding: 40px;">A carregar artigos do Notion...</p>
+        <p style="color: var(--muted); text-align: center; padding: 40px;">A carregar artigos...</p>
       </div>
 
     </div>
@@ -43,7 +36,10 @@
 <script>
   document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("notionArticlesList");
-    const slugsArtigos = ["teste", "diplomatics-historia"]; 
+// O site vai ler o ficheiro invisível gerado pela Netlify!
+const responseLista = await fetch('lista-artigos.json');
+const slugsArtigos = await responseLista.json();
+
 
     container.innerHTML = "";
 
