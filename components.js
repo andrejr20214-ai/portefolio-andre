@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   
-  // 1. Injeção Automática da Barra de Navegação com Submenu Responsivo
+  // 1. Injeção Automática da Barra de Navegação do Portefólio (Responsiva)
   const navHTML = `
     <style>
       .main-nav { position: sticky; top: 0; background: rgba(11, 19, 41, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); z-index: 1000; padding: 15px 0; }
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         background: var(--surface);
         border: 1px solid var(--line);
         border-radius: 12px;
-        min-width: 180px;
+        min-width: 160px;
         top: 100%;
         left: 50%;
         transform: translateX(-50%);
@@ -39,12 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
         color: var(--accent);
       }
 
-      /* Adaptação para Telemóvel (O Submenu "abre-se" lado a lado) */
+      /* Adaptação para Telemóvel */
       @media (max-width: 768px) {
         .nav-wrap { flex-direction: column; justify-content: center; }
         .nav-links { gap: 14px; }
         .dropdown { padding: 0; text-align: center; width: 100%; }
-        .dropdown-trigger { display: none; /* Esconde a palavra "Mais" no telemóvel */ }
+        .dropdown-trigger { display: none; }
         .dropdown-content {
           display: flex;
           flex-direction: row;
@@ -65,20 +65,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <nav class="main-nav">
       <div class="wrap nav-wrap">
+        <!-- Logótipo do Portefólio -->
         <a href="index.html" class="nav-logo">
-          NEHS <span style="color: var(--accent);">2026</span>
+          André <span style="color: var(--accent);">Rodrigues</span>
         </a>
+        
         <div class="nav-links">
           <a href="index.html" class="nav-link" style="color: var(--muted); text-decoration: none; transition: 0.2s;">Início</a>
-          <a href="propostas.html" class="nav-link" style="color: var(--muted); text-decoration: none; transition: 0.2s;">Propostas</a>
-          <a href="candidatos.html" class="nav-link" style="color: var(--muted); text-decoration: none; transition: 0.2s;">Equipa</a>
+          <a href="caderno.html" class="nav-link" style="color: var(--muted); text-decoration: none; transition: 0.2s;">O Caderno</a>
           
-          <!-- O Submenu -->
+          <!-- O Submenu para páginas extra do portefólio -->
           <div class="dropdown">
             <span class="dropdown-trigger">Mais <span style="font-size: 10px;">▼</span></span>
             <div class="dropdown-content">
-              <a href="caderno.html" class="nav-link">O Caderno (Notícias)</a>
-              <a href="debate.html" class="nav-link">Portal de Debate</a>
+              <a href="projetos.html" class="nav-link">Projetos</a>
+              <a href="sobre.html" class="nav-link">Sobre Mim</a>
             </div>
           </div>
 
@@ -90,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   document.body.insertAdjacentHTML('afterbegin', navHTML);
 
-  // Destaca o link ativo consoante a página atual (inclui o submenu)
+  // Destaca o link ativo consoante a página atual
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".nav-link").forEach(link => {
     if (link.getAttribute("href") === currentPage) {
@@ -113,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     progressBar.style.width = scrolled + '%';
   });
 
-  // 3. Cursor Magnético Customizado (Desativado em telemóvel via CSS)
+  // 3. Cursor Magnético Customizado
   const cursor = document.createElement('div');
   cursor.className = 'custom-cursor';
   document.body.appendChild(cursor);
@@ -123,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cursor.style.top = e.clientY + 'px';
   });
 
-  document.querySelectorAll('a, button, article').forEach(el => {
+  document.querySelectorAll('a, button, article, .dropdown-trigger').forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.style.width = '36px'; cursor.style.height = '36px'; cursor.style.opacity = '0.3';
     });
