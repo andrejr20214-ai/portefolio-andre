@@ -17,11 +17,13 @@
   <script>
     CMS.init({
       config: {
-        // 1. LIGAÇÃO DIRETA AO GITHUB (Para a Vercel)
+        // 1. LIGAÇÃO DIRETA AO GITHUB (Via PKCE)
         backend: {
           name: 'github',
-          repo: 'andrejr20214-ai/portefolio-andre', // <-- ATENÇÃO: Coloque aqui o seu link real! (ex: andrept/portefolio)
-          branch: 'main'
+          repo: 'andrejr20214-ai/portefolio-andre', // Ex: andrerodrigues/portefolio
+          branch: 'main',
+          auth_type: 'pkce',
+          app_id: 'Ov23liEWNWWTAgoiGSYR'
         },
         
         // 2. PASTAS DE IMAGENS
