@@ -13,14 +13,23 @@ public_folder: "/images"
 
 collections:
   - name: "caderno"
-    label: "O Caderno"
+    label: "O Caderno (Artigos)"
     folder: "content/caderno"
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Título", name: "title", widget: "string"}
-      - {label: "Data de Publicação", name: "date", widget: "date", format: "YYYY-MM-DD"}
-      - {label: "Categoria", name: "categoria", widget: "string"}
-      - {label: "Imagem de Capa", name: "image", widget: "image", required: false}
-      - {label: "Resumo", name: "resumo", widget: "text"}
-      - {label: "Conteúdo", name: "body", widget: "markdown"}
+      # Os Essenciais
+      - {label: "Título do Artigo", name: "title", widget: "string"}
+      - {label: "Data de Publicação", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false}
+      
+      # A Capa e Organização (Estilo WordPress)
+      - {label: "Imagem de Capa", name: "image", widget: "image", required: false, hint: "A imagem de destaque que aparece no topo e no cartão."}
+      - {label: "Categoria Principal", name: "categoria", widget: "string", default: "Reflexão"}
+      - {label: "Tags / Palavras-chave", name: "tags", widget: "list", required: false, hint: "Escreva uma tag e carregue em Enter (ex: Idade Média, Política, Sociedade)."}
+      
+      # SEO e Rascunhos
+      - {label: "Excerto / Resumo (SEO)", name: "resumo", widget: "text", hint: "O texto curto que aparece nos motores de busca e na página inicial."}
+      - {label: "Guardar como Rascunho?", name: "draft", widget: "boolean", default: false, hint: "Ligue isto para esconder o artigo do site até estar pronto."}
+      
+      # O Editor de Texto
+      - {label: "Conteúdo do Artigo", name: "body", widget: "markdown"}
