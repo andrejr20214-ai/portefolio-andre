@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title id="pageTitle">O Caderno — André Rodrigues</title>
+  <title id="pageTitle">Artigo — NEHS</title>
   <link rel="stylesheet" href="style.css">
   <script src="components.js" defer></script>
   <style>
+    /* Layout Editorial */
     .article-layout {
       display: grid;
       grid-template-columns: 280px 1fr;
@@ -16,40 +17,73 @@
       margin: 0 auto;
       padding: 40px 20px;
     }
+
+    /* Barra Lateral Estilizada */
     .article-sidebar {
       position: sticky;
-      top: 40px;
+      top: 100px; /* Mais baixo para não colar ao menu fixo */
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 25px;
+      padding: 30px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 24px;
     }
+
     .sidebar-block {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
     }
+
     .sidebar-label {
       font-size: 11px;
       font-weight: 700;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
     }
+
     .sidebar-value {
       font-size: 15px;
       font-weight: 600;
       color: var(--text);
     }
+
+    /* Estilo das Tags (Pílulas) */
+    .tag-badge {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 6px;
+      margin-bottom: 6px;
+      text-transform: lowercase;
+    }
+
+    /* Corpo Principal */
     .article-body {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 20px;
       padding: 50px;
     }
+
+    /* Imagem de Capa do Artigo */
+    .article-cover {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 40px;
+      display: none; /* Escondida até o JS verificar que existe */
+    }
+
     @media (max-width: 900px) {
       .article-layout {
         grid-template-columns: 1fr;
@@ -61,42 +95,53 @@
       .article-body {
         padding: 30px 20px;
       }
+      .article-cover {
+        height: 250px;
+      }
     }
   </style>
 </head>
 <body>
 <main>
 
+  <!-- Cabeçalho do Artigo -->
   <header class="hero short wrap" style="padding-bottom: 20px;">
     <div class="orb"></div>
     <div style="max-width: 1100px; width: 100%;">
       <a href="caderno.html" style="color: var(--accent); font-size: 14px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px;">
-        ← Voltar ao Caderno
+        ← Voltar aos Artigos
       </a>
-      <h1 id="artigoTitulo" style="font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 10px; line-height: 1.1;">A carregar artigo...</h1>
+      <h1 id="artigoTitulo" style="font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 10px; line-height: 1.1;">A carregar o artigo...</h1>
     </div>
   </header>
 
+  <!-- Layout de Duas Colunas -->
   <section style="padding-top: 0; border-top: none;">
     <div class="article-layout">
       
-      <!-- BARRA LATERAL -->
+      <!-- BARRA LATERAL (Sidebar) -->
       <aside class="article-sidebar">
-        <div class="sidebar-block">
-          <span class="sidebar-label">Autor</span>
-          <span class="sidebar-value">André Rodrigues</span>
-        </div>
         
-        <hr style="border: none; border-top: 1px solid var(--line); margin: 0;">
-
         <div class="sidebar-block">
           <span class="sidebar-label">Categoria</span>
           <span id="artigoCategoria" class="sidebar-value" style="color: var(--accent);">—</span>
         </div>
 
+        <hr style="border: none; border-top: 1px solid var(--line); margin: 0;">
+
         <div class="sidebar-block">
-          <span class="sidebar-label">Data de Publicação</span>
+          <span class="sidebar-label">Data</span>
           <span id="artigoData" class="sidebar-value">—</span>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--line); margin: 0;">
+
+        <!-- Secção Dinâmica de Tags -->
+        <div class="sidebar-block">
+          <span class="sidebar-label">Palavras-chave</span>
+          <div id="artigoTags" style="margin-top: 5px;">
+            <span style="color: var(--muted); font-size: 13px;">Sem tags</span>
+          </div>
         </div>
 
         <hr style="border: none; border-top: 1px solid var(--line); margin: 0;">
@@ -107,15 +152,14 @@
         </div>
       </aside>
 
-      <!-- CONTEÚDO COM IMAGEM DE CAPA -->
+      <!-- CONTEÚDO DO ARTIGO -->
       <article class="article-body">
-        <!-- Contentor da Imagem de Capa do Artigo -->
-        <div id="artigoImagemContainer" style="display: none; margin-bottom: 30px; border-radius: 14px; overflow: hidden; max-height: 400px;">
-          <img id="artigoImagem" src="" alt="Capa do Artigo" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
+        
+        <!-- A Imagem de Capa injetada aqui -->
+        <img id="artigoImagem" class="article-cover" src="" alt="Capa do artigo">
 
         <div id="artigoConteudo" style="font-size: 18px; line-height: 1.8; color: var(--text); display: flex; flex-direction: column; gap: 24px;">
-          <p style="color: var(--muted);">A carregar o conteúdo a partir do painel...</p>
+          <p style="color: var(--muted);">A ler o texto original...</p>
         </div>
       </article>
 
@@ -137,44 +181,82 @@
 
     try {
       const response = await fetch(`content/caderno/${slug}.md`);
-      if (!response.ok) throw new Error('Artigo não encontrado');
+      if (!response.ok) throw new Error('Ficheiro Markdown não encontrado');
       
       const markdownText = await response.text();
       const partes = markdownText.split('---');
       let metadata = {};
       let conteudoMd = markdownText;
 
+      // O Novo Leitor Inteligente (Capaz de ler Arrays/Listas YAML)
       if (partes.length >= 3) {
-        const linhasMeta = partes[1].trim().split('\n');
-        linhasMeta.forEach(linha => {
-          const [chave, ...valor] = linha.split(':');
-          if (chave && valor.length) {
-            metadata[chave.trim()] = valor.join(':').trim().replace(/^["'](.+)(["'])$/, '$1');
+        const frontmatter = partes[1].trim();
+        conteudoMd = partes.slice(2).join('---').trim();
+
+        // Função rápida para extrair campos de texto normais
+        const getMeta = (key) => {
+          const regex = new RegExp(`^${key}:\\s*(.*)$`, 'mi');
+          const match = frontmatter.match(regex);
+          return match ? match[1].trim().replace(/^["'](.+)(["'])$/, '$1') : '';
+        };
+
+        metadata.title = getMeta('title');
+        metadata.categoria = getMeta('categoria');
+        metadata.date = getMeta('date');
+        metadata.image = getMeta('image');
+
+        // Lógica especial para ler as Tags (que são guardadas em lista)
+        metadata.tags = [];
+        let lendoTags = false;
+        frontmatter.split('\n').forEach(linha => {
+          const l = linha.trim();
+          if (l.startsWith('tags:')) {
+            lendoTags = true;
+            // Caso o Decap grave num array na mesma linha: tags: [Um, Dois]
+            const inlineMatch = l.match(/\[(.*?)\]/);
+            if (inlineMatch) {
+              metadata.tags = inlineMatch[1].split(',').map(t => t.trim().replace(/['"]/g, ''));
+              lendoTags = false;
+            }
+          } else if (lendoTags && l.startsWith('-')) {
+            // Caso grave em lista vertical: - Um \n - Dois
+            metadata.tags.push(l.replace('-', '').trim().replace(/['"]/g, ''));
+          } else if (lendoTags && l !== '' && !l.startsWith('-')) {
+            lendoTags = false; // Acabaram as tags
           }
         });
-        conteudoMd = partes.slice(2).join('---').trim();
       }
 
-      // Preenche os dados visuais
-      document.getElementById('pageTitle').innerText = `${metadata.title || 'Artigo'} — André Rodrigues`;
+      // 1. Preencher Textos Básicos
+      document.getElementById('pageTitle').innerText = `${metadata.title || 'Artigo'} — NEHS`;
       document.getElementById('artigoTitulo').innerText = metadata.title || 'Sem Título';
-      document.getElementById('artigoCategoria').innerText = metadata.categoria || 'Reflexão';
-      document.getElementById('artigoData').innerText = metadata.date || 'Recente';
+      document.getElementById('artigoCategoria').innerText = metadata.categoria || 'Geral';
+      document.getElementById('artigoData').innerText = metadata.date || 'Data Indisponível';
       
-      // Mostra a imagem de capa se existir nos metadados do CMS
+      // 2. Processar e Desenhar as Tags
+      const tagsContainer = document.getElementById('artigoTags');
+      if (metadata.tags && metadata.tags.length > 0) {
+        tagsContainer.innerHTML = metadata.tags.map(tag => `<span class="tag-badge">#${tag}</span>`).join('');
+      }
+
+      // 3. Processar Imagem de Capa
       if (metadata.image) {
-        const imgContainer = document.getElementById('artigoImagemContainer');
         const imgElement = document.getElementById('artigoImagem');
         imgElement.src = metadata.image;
-        imgContainer.style.display = 'block';
+        imgElement.style.display = 'block'; // Mostra a imagem se ela existir
       }
 
-      const paragrafosHTML = conteudoMd.split('\n\n').map(paragrafo => `<p>${paragrafo}</p>`).join('');
+      // 4. Injetar Conteúdo
+      const paragrafosHTML = conteudoMd.split('\n\n').map(p => {
+        // Ignora parágrafos vazios para não criar espaçamento extra
+        return p.trim() ? `<p>${p}</p>` : '';
+      }).join('');
+      
       document.getElementById('artigoConteudo').innerHTML = paragrafosHTML;
 
     } catch (error) {
       document.getElementById('artigoTitulo').innerText = "Artigo Indisponível";
-      document.getElementById('artigoConteudo').innerHTML = "<p style='color: var(--muted);'>Não foi possível carregar o conteúdo deste artigo.</p>";
+      document.getElementById('artigoConteudo').innerHTML = "<p style='color: var(--muted);'>Ocorreu um erro ao carregar o texto. O artigo pode ter sido movido ou guardado como rascunho.</p>";
     }
   });
 </script>
