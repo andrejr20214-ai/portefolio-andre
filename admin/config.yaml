@@ -1,0 +1,26 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  # ... (mantenha o resto das suas coleções do caderno e projetos exatamente como estavam)gsga
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "caderno"
+    label: "O Caderno"
+    folder: "content/caderno"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Data de Publicação", name: "date", widget: "date", format: "YYYY-MM-DD"}
+      - {label: "Categoria", name: "categoria", widget: "string"}
+      - {label: "Imagem de Capa", name: "image", widget: "image", required: false}
+      - {label: "Resumo", name: "resumo", widget: "text"}
+      - {label: "Conteúdo", name: "body", widget: "markdown"}
