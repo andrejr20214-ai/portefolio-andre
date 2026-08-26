@@ -8,7 +8,6 @@
 </head>
 <body>
 
-  <!-- Configuração explícita para forçar o CMS a ler o config.yml local -->
   <script>
     window.CMS_MANUAL_INIT = true;
   </script>
@@ -16,29 +15,36 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
   <script>
-    // Inicialização manual a apontar diretamente para o ficheiro config.yml na mesma pasta
     CMS.init({
       config: {
+        // 1. LIGAÇÃO DIRETA AO GITHUB (Para a Vercel)
         backend: {
-          name: 'git-gateway',
+          name: 'github',
+          repo: 'SEU-NOME-NO-GITHUB/NOME-DO-REPOSITORIO', // <-- ATENÇÃO: Coloque aqui o seu link real! (ex: andrept/portefolio)
           branch: 'main'
         },
-        local_backend: true,
+        
+        // 2. PASTAS DE IMAGENS
         media_folder: 'images',
         public_folder: '/images',
+        
+        // 3. ESTRUTURA DOS ARTIGOS (Modo Editorial)
         collections: [
           {
             name: 'caderno',
-            label: 'O Caderno',
+            label: 'O Caderno (Artigos)',
             folder: 'content/caderno',
             create: true,
             slug: '{{slug}}',
             fields: [
-              { label: 'Título', name: 'title', widget: 'string' },
-              { label: 'Data', name: 'date', widget: 'date', format: 'YYYY-MM-DD' },
-              { label: 'Categoria', name: 'categoria', widget: 'string' },
-              { label: 'Resumo', name: 'resumo', widget: 'text' },
-              { label: 'Conteúdo', name: 'body', widget: 'markdown' }
+              { label: 'Título do Artigo', name: 'title', widget: 'string' },
+              { label: 'Data de Publicação', name: 'date', widget: 'datetime', format: 'YYYY-MM-DD', date_format: 'DD/MM/YYYY', time_format: false },
+              { label: 'Imagem de Capa', name: 'image', widget: 'image', required: false, hint: 'A imagem panorâmica que aparece no topo.' },
+              { label: 'Categoria Principal', name: 'categoria', widget: 'string', default: 'Reflexão' },
+              { label: 'Tags / Palavras-chave', name: 'tags', widget: 'list', required: false, hint: 'Pressione Enter após cada tag.' },
+              { label: 'Excerto / Resumo', name: 'resumo', widget: 'text', required: false },
+              { label: 'Guardar como Rascunho?', name: 'draft', widget: 'boolean', default: false, hint: 'Oculte o artigo até estar finalizado.' },
+              { label: 'Conteúdo do Artigo', name: 'body', widget: 'markdown' }
             ]
           }
         ]
