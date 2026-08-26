@@ -1,17 +1,9 @@
 backend:
   name: github
-  repo: andre20214-ai/portefolio-andre # Substitua pelos dados reais (ex: andre/portefolio)
+  repo: andrejr20214-ai/portefolio-andre # Ex: andrerodrigues/meu-site
   branch: main
-
-media_folder: "images"
-public_folder: "/images"
-
-# (Mantenha todas as coleções que já tinha aqui para baixo exatamente iguais)
-media_folder: "images"
-public_folder: "/images"
-
-collections:
-  # ... (mantenha o resto das suas coleções do caderno e projetos exatamente como estavam)gsga
+  auth_type: pkce
+  app_id: Ov23liEWNWWTAgoiGSYR
 
 media_folder: "images"
 public_folder: "/images"
@@ -23,18 +15,11 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      # Os Essenciais
       - {label: "Título do Artigo", name: "title", widget: "string"}
       - {label: "Data de Publicação", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false}
-      
-      # A Capa e Organização (Estilo WordPress)
-      - {label: "Imagem de Capa", name: "image", widget: "image", required: false, hint: "A imagem de destaque que aparece no topo e no cartão."}
+      - {label: "Imagem de Capa", name: "image", widget: "image", required: false}
       - {label: "Categoria Principal", name: "categoria", widget: "string", default: "Reflexão"}
-      - {label: "Tags / Palavras-chave", name: "tags", widget: "list", required: false, hint: "Escreva uma tag e carregue em Enter (ex: Idade Média, Política, Sociedade)."}
-      
-      # SEO e Rascunhos
-      - {label: "Excerto / Resumo (SEO)", name: "resumo", widget: "text", hint: "O texto curto que aparece nos motores de busca e na página inicial."}
-      - {label: "Guardar como Rascunho?", name: "draft", widget: "boolean", default: false, hint: "Ligue isto para esconder o artigo do site até estar pronto."}
-      
-      # O Editor de Texto
+      - {label: "Tags / Palavras-chave", name: "tags", widget: "list", required: false}
+      - {label: "Excerto / Resumo", name: "resumo", widget: "text", required: false}
+      - {label: "Guardar como Rascunho?", name: "draft", widget: "boolean", default: false}
       - {label: "Conteúdo do Artigo", name: "body", widget: "markdown"}
