@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: andrejr20214-ai/portefolio-andre # Ex: andrerodrigues/meu-site
+  repo: 'andrejr20214-ai/portefolio-andre' # Ex: andrerodrigues/meu-site
   branch: main
   auth_type: pkce
   app_id: Ov23liEWNWWTAgoiGSYR
