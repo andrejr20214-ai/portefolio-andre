@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>O Caderno — André Rodrigues</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="components.js" defer></script>
+</head>
+<body>
+<main>
+
+  <header class="hero short wrap">
+    <div class="orb"></div>
+    <div>
+      <div class="eyebrow">REFLEXÕES E APONTAMENTOS</div>
+      <h1>O Caderno.</h1>
+      <p style="color: var(--muted); font-size: 18px; margin-top: 15px;">Artigos, ensaios e notas de leitura sincronizados a partir do meu espaço de trabalho.</p>
+    </div>
+  </header>
+
+  <section style="padding-top: 0; border-top: none;">
+    <div class="wrap" style="max-width: 800px;">
+      
+      <!-- Acesso Direto ao Notion -->
+      <div style="margin-bottom: 40px; display: flex; justify-content: space-between; align-items: center; background: var(--surface); padding: 15px 20px; border-radius: 12px; border: 1px solid var(--line);">
+        <span style="font-size: 14px; color: var(--muted);">Back Office (Notion) Ativo</span>
+        <a href="https://app.notion.com/p/3c872fbf61168037bb7be7b06be1cbf5?v=3c872fbf6116801cb20e000c8f37dc40" target="_blank" class="btn" style="font-size: 13px; padding: 8px 16px;">
+          <i class="fa-solid fa-pen-to-square" style="margin-right: 8px;"></i> Escrever no Notion ↗
+        </a>
+      </div>
+
+      <!-- Contentor onde os artigos do Notion/JSON vão aparecer -->
+      <div id="notionArticlesList" style="display: flex; flex-direction: column; gap: 25px;">
+        <p style="color: var(--muted); text-align: center; padding: 40px;">A carregar artigos do Notion...</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    const container = document.getElementById("notionArticlesList");
+    const slugsArtigos = ["teste", "diplomatics-historia"]; 
+
+    container.innerHTML = "";
+
+    for (const slug of slugsArtigos) {
+      try {
+        const response = await fetch(`content/caderno/${slug}.md`);
+        if (!response.ok) continue;
+        
+        const textoMd = await response.text();
+        const partes = textoMd.split('---');
+        let metadata = {};
+        
+        if (partes.length >= 3) {
+          partes[1].trim().split('\n').forEach(linha => {
+            const [chave, ...valor] = linha.split(':');
+            if (chave && valor.length) {
+              metadata[chave.trim()] = valor.join(':').trim().replace(/^["'](.+)(["'])$/, '$1');
+            }
+          });
+        }
+
+        // Se o artigo tiver imagem de capa, criamos o elemento visual
+        let imagemHTML = metadata.image ? `<div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; max-height: 220px;"><img src="${metadata.image}" alt="${metadata.title}" style="width: 100%; height: 100%; object-fit: cover;"></div>` : '';
+
+        container.innerHTML += `
+          <article style="background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 30px; transition: 0.3s;" class="project">
+            ${imagemHTML}
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span style="font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em;">${metadata.categoria || 'Artigo'}</span>
+              <span style="font-size: 13px; color: var(--muted);">${metadata.date || ''}</span>
+            </div>
+            <h3 style="font-size: 24px; margin-bottom: 12px; color: var(--text);">${metadata.title || 'Sem Título'}</h3>
+            <p style="color: var(--muted); font-size: 16px; line-height: 1.6; margin-bottom: 20px;">${metadata.resumo || ''}</p>
+            <a href="artigo.html?slug=${slug}" style="color: var(--accent); font-weight: 700; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
+              Ler artigo completo →
+            </a>
+          </article>
+        `;
+      } catch (e) {
+        console.log(`Artigo ${slug} não carregado.`);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title id="pageTitle">O Caderno — André Rodrigues</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="components.js" defer></script>
+  <style>
+    .article-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 60px;
+      align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .article-sidebar {
+      position: sticky;
+      top: 40px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .sidebar-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sidebar-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .sidebar-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .article-body {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 50px;
+    }
+    @media (max-width: 900px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .article-sidebar {
+        position: static;
+      }
+      .article-body {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+<main>
+
+  <header class="hero short wrap" style="padding-bottom: 20px;">
+    <div class="orb"></div>
+    <div style="max-width: 1100px; width: 100%;">
+      <a href="caderno.html" style="color: var(--accent); font-size: 14px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px;">
+        ← Voltar ao Caderno
+      </a>
+      <h1 id="artigoTitulo" style="font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 10px; line-height: 1.1;">A carregar artigo...</h1>
+    </div>
+  </header>
+
+  <section style="padding-top: 0; border-top: none;">
+    <div class="article-layout">
+      
+      <!-- BARRA LATERAL -->
+      <aside class="article-sidebar">
+        <div class="sidebar-block">
+          <span class="sidebar-label">Autor</span>
+          <span class="sidebar-value">André Rodrigues</span>
+        </div>
+        
+        <hr style="border: none; border-top: 1px solid var(--line); margin: 0;">
+
+        <div class="sidebar-block">
+          <span class="sidebar-label">Categoria</span>
+          <span id="artigoCategoria" class="sidebar-value" style="color: var(--accent);">—</span>
+        </div>
+
+        <div class="sidebar-block">
+          <span class="sidebar-label">Data de Publicação</span>
+          <span id="artigoData" class="sidebar-value">—</span>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--line); margin: 0;">
+
+        <div class="sidebar-block">
+          <span class="sidebar-label">Ações</span>
+          <a href="caderno.html" class="btn" style="text-align: center; font-size: 13px; padding: 10px; margin-top: 5px;">Ver todos os artigos</a>
+        </div>
+      </aside>
+
+      <!-- CONTEÚDO COM IMAGEM DE CAPA -->
+      <article class="article-body">
+        <!-- Contentor da Imagem de Capa do Artigo -->
+        <div id="artigoImagemContainer" style="display: none; margin-bottom: 30px; border-radius: 14px; overflow: hidden; max-height: 400px;">
+          <img id="artigoImagem" src="" alt="Capa do Artigo" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+
+        <div id="artigoConteudo" style="font-size: 18px; line-height: 1.8; color: var(--text); display: flex; flex-direction: column; gap: 24px;">
+          <p style="color: var(--muted);">A carregar o conteúdo a partir do painel...</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug');
+
+    if (!slug) {
+      document.getElementById('artigoTitulo').innerText = "Artigo não encontrado";
+      document.getElementById('artigoConteudo').innerHTML = "<p>O link selecionado é inválido.</p>";
+      return;
+    }
+
+    try {
+      const response = await fetch(`content/caderno/${slug}.md`);
+      if (!response.ok) throw new Error('Artigo não encontrado');
+      
+      const markdownText = await response.text();
+      const partes = markdownText.split('---');
+      let metadata = {};
+      let conteudoMd = markdownText;
+
+      if (partes.length >= 3) {
+        const linhasMeta = partes[1].trim().split('\n');
+        linhasMeta.forEach(linha => {
+          const [chave, ...valor] = linha.split(':');
+          if (chave && valor.length) {
+            metadata[chave.trim()] = valor.join(':').trim().replace(/^["'](.+)(["'])$/, '$1');
+          }
+        });
+        conteudoMd = partes.slice(2).join('---').trim();
+      }
+
+      // Preenche os dados visuais
+      document.getElementById('pageTitle').innerText = `${metadata.title || 'Artigo'} — André Rodrigues`;
+      document.getElementById('artigoTitulo').innerText = metadata.title || 'Sem Título';
+      document.getElementById('artigoCategoria').innerText = metadata.categoria || 'Reflexão';
+      document.getElementById('artigoData').innerText = metadata.date || 'Recente';
+      
+      // Mostra a imagem de capa se existir nos metadados do CMS
+      if (metadata.image) {
+        const imgContainer = document.getElementById('artigoImagemContainer');
+        const imgElement = document.getElementById('artigoImagem');
+        imgElement.src = metadata.image;
+        imgContainer.style.display = 'block';
+      }
+
+      const paragrafosHTML = conteudoMd.split('\n\n').map(paragrafo => `<p>${paragrafo}</p>`).join('');
+      document.getElementById('artigoConteudo').innerHTML = paragrafosHTML;
+
+    } catch (error) {
+      document.getElementById('artigoTitulo').innerText = "Artigo Indisponível";
+      document.getElementById('artigoConteudo').innerHTML = "<p style='color: var(--muted);'>Não foi possível carregar o conteúdo deste artigo.</p>";
+    }
+  });
+</script>
+
+</body>
+</html>
