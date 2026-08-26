@@ -1,7 +1,12 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: andre20214-ai/portefolio-andre # Substitua pelos dados reais (ex: andre/portefolio)
   branch: main
 
+media_folder: "images"
+public_folder: "/images"
+
+# (Mantenha todas as coleções que já tinha aqui para baixo exatamente iguais)
 media_folder: "images"
 public_folder: "/images"
 
