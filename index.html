@@ -1,176 +1,49 @@
 <!doctype html>
 <html lang="pt-PT">
 <head>
-  <head>
-
-    <!-- Biblioteca Externa de Ícones (Font Awesome) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portefólio pessoal de André Rodrigues — História, comunicação, projetos digitais e cultura.">
-  
-  <!-- Open Graph Tags (Para partilha bonita nas Redes Sociais) -->
-  <meta property="og:title" content="André Rodrigues — Portefólio">
-  <meta property="og:description" content="Estudante de História, comunicação, projetos digitais e cultura.">
-  <meta property="og:image" content="https://via.placeholder.com/1200x630/d7ff4f/080808?text=Andre+Rodrigues+Portefolio"> <!-- Substitua depois por uma imagem sua -->
-  <meta property="og:type" content="website">
-  
-  <title>André Rodrigues — Portefólio</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="components.js" defer></script>
-</head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>André Rodrigues — Portefólio</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="components.js" defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Controlo — Back Office</title>
+  <link href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css" rel="stylesheet" />
 </head>
 <body>
-<main>
-  <header class="hero wrap">
-    <div class="orb"></div>
-    <div style="width: 100%;">
-      <div class="eyebrow">História · Comunicação · Cultura · Digital</div>
-      
-      <!-- O Nome e a Missão Lado a Lado -->
-      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 20px;">
-        <h1 style="margin: 0;">André<br><em>Rodrigues.</em></h1>
-        
-        <div style="max-width: 400px; border-left: 2px solid var(--accent); padding-left: 25px;">
-          <p style="font-size: 22px; font-weight: 600; color: var(--text); font-style: italic; line-height: 1.4;">
-            "A minha maior missão no mundo é a ajudar o maior número de pessoas possível."
-          </p>
-        </div>
-      </div>
 
-      <div class="hero-bottom" style="margin-top: 45px;">
-        <p class="intro">Estudante de História na Faculdade de Letras da Universidade de Lisboa, com interesse nas áreas da educação, comunicação, participação cívica e inovação social .</p>
-        <div class="cta">
-          <a class="btn primary" href="#projetos">Ver projetos ↓</a>
-          <a class="btn" href="contacto.html">Entrar em contacto</a>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- Configuração explícita para forçar o CMS a ler o config.yml local -->
+  <script>
+    window.CMS_MANUAL_INIT = true;
+  </script>
 
-  <section style="padding: 80px 0; border-top: none; text-align: center;">
-    <div class="wrap">
-      <h2 style="font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; letter-spacing: -0.05em; color: var(--text); max-width: 900px; margin: auto; line-height: 1.2;">
-        "A minha maior missão no mundo é ajudar o maior número de pessoas possível."
-      </h2>
-      <div style="width: 60px; height: 4px; background: var(--accent); margin: 30px auto 0; border-radius: 2px;"></div>
-    </div>
-  </section>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
-  <section id="sobre">
-    <div class="wrap">
-      <div class="section-head"><h2>Sobre<br>mim.</h2><p>Uma combinação entre pensamento histórico, comunicação e vontade de transformar ideias em projetos concretos.</p></div>
-      <div class="about">
-        <div>
-          <p class="about-copy" style="margin-bottom: 20px;">Ao longo do meu percurso, tenho conciliado a formação académica com o desenvolvimento de projetos de impacto social, assumindo responsabilidades em iniciativas de liderança, comunicação e representação estudantil .</p>
-          <p class="about-copy">Acredito que <strong>uma comunicação clara e acessível</strong> é uma ferramenta essencial para aproximar as pessoas do conhecimento e incentivar uma cidadania mais ativa .</p>
-        </div>
-        <div class="facts">
-          <div class="fact"><b>História</b><span>Universidade de Lisboa · FLUL </span></div>
-          <div class="fact"><b>Digital</b><span>Conteúdo, web e comunicação</span></div>
-          <div class="fact"><b>Cultura</b><span>Eventos e projetos cívicos</span></div>
-          <div class="fact"><b>Educação</b><span>Literacia e apoio aos estudantes</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projetos">
-    <div class="wrap">
-      <div class="section-head"><h2>Projetos<br>selecionados.</h2><p>Alguns dos projetos que melhor representam o meu percurso e a forma como gosto de trabalhar.</p></div>
-      <div class="projects">
-        <article class="project">
-          <div><span class="num">01 / PROJETO</span><h3>Voz Própria</h3><p>Espaço de reflexão e debate sobre temas da atualidade, cidadania, educação e sociedade .</p></div>
-          <div><div class="tags"><span class="tag">Podcast</span><span class="tag">Comunicação</span></div>
-          <a href="voz-propria.html" style="display:inline-block; margin-top:20px; font-size:14px; font-weight:700; color:var(--accent);">Ver projeto ↗</a></div>
-        </article>
-        <article class="project">
-          <div><span class="num">02 / EDUCAÇÃO</span><h3>Mais Sobre Educação</h3><p>Projeto dedicado à literacia educativa e à democratização do acesso à informação sobre o sistema de ensino nacional .</p></div>
-          <div><div class="tags"><span class="tag">Educação</span><span class="tag">Digital</span></div>
-          <a href="mais-sobre-educacao.html" style="display:inline-block; margin-top:20px; font-size:14px; font-weight:700; color:var(--accent);">Ver projeto ↗</a></div>
-        </article>
-        <article class="project">
-          <div><span class="num">03 / CULTURA</span><h3>Sons à Solta</h3><p>Apresentação da 5.ª edição do concurso musical integrado no programa municipal Viseu Jovem .</p></div>
-          <div><div class="tags"><span class="tag">Cultura</span><span class="tag">Apresentação</span></div>
-          <a href="sons-a-solta.html" style="display:inline-block; margin-top:20px; font-size:14px; font-weight:700; color:var(--accent);">Ver projeto ↗</a></div>
-        </article>
-        <article class="project">
-          <div><span class="num">04 / ESTUDANTES</span><h3>Central do Estudante</h3><p>Conceito de plataforma digital para reunir informação útil sobre educação, acesso ao ensino superior e vida académica[cite: 3].</p></div>
-          <div><div class="tags"><span class="tag">UX</span><span class="tag">Informação</span><span class="tag">Web</span></div>
-          <a href="central-do-estudante.html" style="display:inline-block; margin-top:20px; font-size:14px; font-weight:700; color:var(--accent);">Ver projeto ↗</a></div>
-        </article>
-      </div>
-    </div>
-<section id="experiencia">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Experiência<br>Profissional.</h2>
-        <p>O meu percurso cruza comunicação institucional, projetos editoriais, associativismo e ensino.</p>
-      </div>
-      
-      <!-- A lista de experiências com ID -->
-      <div class="timeline" id="expTimeline">
-        
-        <!-- Itens Visíveis -->
-        <div class="item"><small>JULHO DE 2026 — PRESENTE</small><h3>Criador e Apresentador · Voz Própria</h3><p>Definição da linha editorial, investigação dos temas, escrita de guiões, condução dos episódios e produção de conteúdos.</p></div>
-        <div class="item"><small>JUNHO DE 2026 — PRESENTE</small><h3>Mentor · Residências Universitárias ULisboa</h3><p>Atuação no âmbito do projeto "Promoção de Sucesso e Redução de Abandono".</p></div>
-        <div class="item"><small>JUNHO DE 2026 — PRESENTE</small><h3>Aluno Mentor · Faculdade de Letras (ULisboa)</h3><p>Apoio à integração académica e social de estudantes de História.</p></div>
-        <div class="item"><small>JULHO DE 2026</small><h3>Apresentador · Câmara Municipal de Viseu</h3><p>Apresentação da 5.ª edição do concurso musical "Sons à Solta".</p></div>
-        
-        <!-- Itens Escondidos -->
-        <div class="item hidden-item"><small>MARÇO DE 2026 — JULHO DE 2026</small><h3>Gestor de Redes Sociais · Giving Tuesday Portugal</h3><p>Gestão da comunicação digital da organização.</p></div>
-        <div class="item hidden-item"><small>OUTUBRO DE 2025 — MARÇO DE 2026</small><h3>Colaborador · Faculdade de Letras (ULisboa)</h3><p>Apoio à produção de conteúdos de comunicação institucional.</p></div>
-        <div class="item hidden-item"><small>FEVEREIRO DE 2026 — ABRIL DE 2026</small><h3>Orientação Vocacional · Escola Secundária De Viriato</h3><p>Dinamização de ações dirigidas a alunos do ensino secundário.</p></div>
-        <div class="item hidden-item"><small>JANEIRO DE 2026</small><h3>Voz-off · Universidade de Lisboa</h3><p>Narração oficial da Cerimónia de Graduação 2024/2025.</p></div>
-        <div class="item hidden-item"><small>SETEMBRO DE 2024 — JULHO DE 2025</small><h3>Membro do Conselho Geral · Escola Secundária De Viriato</h3><p>Representante dos alunos no órgão máximo de decisão da escola.</p></div>
-        <div class="item hidden-item"><small>MARÇO DE 2025 — JUNHO DE 2025</small><h3>Líder de Projeto · "Vozes da Comunidade"</h3><p>Coordenação de estudo sobre bairros sociais em articulação com a Câmara Municipal de Viseu.</p></div>
-        <div class="item hidden-item"><small>JULHO DE 2019 — DEZEMBRO DE 2024</small><h3>Líder e Fundador · Mais Sobre Educação</h3><p>Fundação e liderança de site informativo dedicado à literacia educativa.</p></div>
-        <div class="item hidden-item"><small>SETEMBRO DE 2020 — AGOSTO DE 2026</small><h3>Explicador · Autónomo</h3><p>Explicador Voluntário a jovens do Ensino Secundário.</p></div>
-      </div>
-
-      <!-- Botão com cor corrigida (color: var(--text)) -->
-      <div style="text-align: center; margin-top: 40px;">
-        <button class="btn" style="background: transparent; border-color: var(--line); color: var(--text); font-size: 15px; padding: 14px 24px; cursor: pointer;" onclick="const t = document.getElementById('expTimeline'); t.classList.toggle('expanded'); this.innerText = t.classList.contains('expanded') ? 'Mostrar menos ↑' : 'Mostrar mais experiências ↓';">
-          Mostrar mais experiências ↓
-        </button>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="educacao">
-    <div class="wrap">
-      <div class="section-head"><h2>Formação<br>Académica.</h2><p>O meu percurso de estudos.</p></div>
-      <div class="timeline">
-        <div class="item"><small>SETEMBRO DE 2025 — JUNHO DE 2028</small><h3>Licenciatura em História</h3><p>Faculdade de Letras da Universidade de Lisboa .</p></div>
-        <div class="item"><small>SETEMBRO DE 2023 — JUNHO DE 2025</small><h3>Ensino Secundário, Línguas e Humanidades</h3><p>Escola Secundária Viriato .</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="competencias">
-    <div class="wrap">
-      <div class="section-head"><h2>O que<br>faço.</h2><p>Competências, ferramentas e línguas.</p></div>
-      
-      <h3 style="font-size: 16px; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: 15px;">Competências Gerais</h3>
-      <div class="skills" style="margin-bottom: 40px;">
-        <span class="skill">Planejamento de projetos </span><span class="skill">Ciência de dados </span><span class="skill">WordPress </span>
-        <span class="skill">Estratégia de comunicação</span><span class="skill">Redes sociais</span><span class="skill">Copywriting</span>
-        <span class="skill">HTML · CSS</span>
-      </div>
-
-      <h3 style="font-size: 16px; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: 15px;">Línguas</h3>
-      <div class="skills">
-        <span class="skill">Português (Nativo) </span><span class="skill">Inglês (Trabalho Limitado) </span><span class="skill">Espanhol (Trabalho Limitado) </span><span class="skill">Francês (Profissional) </span>
-      </div>
-    </div>
-  </section>
-</main>
+  <script>
+    // Inicialização manual a apontar diretamente para o ficheiro config.yml na mesma pasta
+    CMS.init({
+      config: {
+        backend: {
+          name: 'git-gateway',
+          branch: 'main'
+        },
+        local_backend: true,
+        media_folder: 'images',
+        public_folder: '/images',
+        collections: [
+          {
+            name: 'caderno',
+            label: 'O Caderno',
+            folder: 'content/caderno',
+            create: true,
+            slug: '{{slug}}',
+            fields: [
+              { label: 'Título', name: 'title', widget: 'string' },
+              { label: 'Data', name: 'date', widget: 'date', format: 'YYYY-MM-DD' },
+              { label: 'Categoria', name: 'categoria', widget: 'string' },
+              { label: 'Resumo', name: 'resumo', widget: 'text' },
+              { label: 'Conteúdo', name: 'body', widget: 'markdown' }
+            ]
+          }
+        ]
+      }
+    });
+  </script>
 </body>
 </html>
