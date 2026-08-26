@@ -38,27 +38,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, 60); 
 
-  // MENU (Com o novo botão de Pesquisa/Comandos incluído)
+  // MENU (Com a estrutura limpa para o Submenu "Mais")
   const navHTML = `
   <nav aria-label="Navegação Principal">
     <a class="brand" href="index.html">AR<span>.</span></a>
     <button class="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+    
     <div class="links">
       <a href="sobre.html">Sobre</a>
       <a href="index.html#projetos">Projetos</a>
-      <a href="infografico.html">Números</a>
-      <a href="palestras-e-voz.html">Voz & Oratória</a>
-      <a href="impacto-cidadania.html">Cidadania</a>
-      <a href="servicos.html">Serviços</a>
       <a href="caderno.html">Caderno</a>
+      <a href="servicos.html">Serviços</a>
       
+      <!-- SUBMENU (Limpo, sem estilos misturados) -->
+      <div class="nav-dropdown">
+        <a style="cursor: pointer;">Mais <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left:4px;"></i></a>
+        <div class="nav-dropdown-content">
+          <a href="infografico.html">Números</a>
+          <a href="palestras-e-voz.html">Voz & Oratória</a>
+          <a href="impacto-cidadania.html">Cidadania</a>
+          <a href="estante.html" title="A Estante">A Estante</a>
+          <a href="uses.html" title="O Meu Setup">Setup</a>
+        </div>
+      </div>
+
       <!-- Novo Botão Visível de Pesquisa/Menu Rápido -->
       <button id="searchTrigger" class="nav-search-trigger" title="Pesquisa Rápida (Cmd + K)" aria-label="Abrir Menu de Pesquisa">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
 
-      <a href="estante.html" class="nav-link-icon" title="A Estante"><i class="fa-solid fa-book-open nav-icon"></i></a>
-      <a href="uses.html" class="nav-link-icon" title="O Meu Setup"><i class="fa-solid fa-laptop-code nav-icon"></i></a>
       <a href="contacto.html" class="nav-contact-btn">Contacto</a>
     </div>
   </nav>`;
