@@ -3,168 +3,151 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title id="pageTitle">Artigo — NEHS</title>
+  <title id="pageTitle">Artigo — André Rodrigues</title>
   <link rel="stylesheet" href="style.css">
   <script src="components.js" defer></script>
   <style>
-    /* Layout Editorial */
-    .article-layout {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 60px;
-      align-items: start;
-      max-width: 1100px;
+    /* ========================================== */
+    /*        DESIGN EDITORIAL DE LUXO            */
+    /* ========================================== */
+    
+    .editorial-container {
+      max-width: 720px; /* Largura ideal para leitura prolongada */
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 40px 20px 80px 20px;
     }
 
-    /* Barra Lateral Estilizada */
-    .article-sidebar {
-      position: sticky;
-      top: 100px; /* Mais baixo para não colar ao menu fixo */
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
+    .editorial-header {
+      text-align: center;
+      margin-bottom: 40px;
     }
 
-    .sidebar-block {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .sidebar-label {
-      font-size: 11px;
+    .editorial-meta {
+      font-size: 13px;
       font-weight: 700;
-      color: var(--muted);
+      color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 0.1em;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
     }
 
-    .sidebar-value {
-      font-size: 15px;
-      font-weight: 600;
+    .editorial-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 25px;
+      letter-spacing: -0.02em;
+    }
+
+    .editorial-cover {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 50px auto;
+      display: block;
+      height: 50vh;
+      min-height: 400px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      display: none; /* Oculto até ser injetado via JS */
+    }
+
+    .editorial-body {
+      font-size: 21px; /* Tamanho de letra de revista premium */
+      line-height: 1.8;
       color: var(--text);
     }
 
-    /* Estilo das Tags (Pílulas) */
-    .tag-badge {
-      display: inline-block;
-      background: rgba(59, 130, 246, 0.15);
+    .editorial-body p {
+      margin-bottom: 1.8em;
+      color: rgba(255, 255, 255, 0.85); /* Contraste suavizado para leitura */
+    }
+
+    /* O toque académico/editorial: Letra Capital (Drop Cap) no 1º Parágrafo */
+    .editorial-body > p:first-of-type::first-letter {
+      font-size: 4em;
+      font-weight: 800;
       color: var(--accent);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      margin-right: 6px;
-      margin-bottom: 6px;
-      text-transform: lowercase;
+      float: left;
+      line-height: 0.8;
+      margin-right: 12px;
+      margin-top: 6px;
     }
 
-    /* Corpo Principal */
-    .article-body {
-      background: var(--surface);
+    /* Estilo para Citações/Blockquotes */
+    .editorial-body blockquote {
+      border-left: 4px solid var(--accent);
+      padding-left: 20px;
+      margin: 40px 0;
+      font-size: 24px;
+      font-style: italic;
+      color: var(--text);
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--line);
+    }
+
+    .tag-badge {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
       border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 50px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+    .tag-badge:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
     }
 
-    /* Imagem de Capa do Artigo */
-    .article-cover {
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
-      border-radius: 14px;
-      margin-bottom: 40px;
-      display: none; /* Escondida até o JS verificar que existe */
-    }
-
-    @media (max-width: 900px) {
-      .article-layout {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      .article-sidebar {
-        position: static;
-      }
-      .article-body {
-        padding: 30px 20px;
-      }
-      .article-cover {
-        height: 250px;
-      }
+    @media (max-width: 768px) {
+      .editorial-cover { height: 250px; border-radius: 12px; margin-bottom: 30px; }
+      .editorial-body { font-size: 18px; }
+      .editorial-body > p:first-of-type::first-letter { font-size: 3.2em; margin-top: 4px; }
     }
   </style>
 </head>
 <body>
-<main>
+<main style="padding-top: 80px;">
 
-  <!-- Cabeçalho do Artigo -->
-  <header class="hero short wrap" style="padding-bottom: 20px;">
-    <div class="orb"></div>
-    <div style="max-width: 1100px; width: 100%;">
-      <a href="caderno.html" style="color: var(--accent); font-size: 14px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px;">
-        ← Voltar aos Artigos
-      </a>
-      <h1 id="artigoTitulo" style="font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 10px; line-height: 1.1;">A carregar o artigo...</h1>
+  <!-- O Cabeçalho Centrado -->
+  <header class="editorial-header wrap">
+    <a href="caderno.html" style="color: var(--muted); font-size: 14px; text-decoration: none; display: inline-block; margin-bottom: 30px; transition: 0.2s;">
+      ← Voltar aos artigos
+    </a>
+    <div class="editorial-meta">
+      <span id="artigoCategoria">—</span>
+      <span style="color: var(--line);">•</span>
+      <span id="artigoData" style="color: var(--muted);">—</span>
     </div>
+    <h1 id="artigoTitulo" class="editorial-title">A carregar...</h1>
   </header>
 
-  <!-- Layout de Duas Colunas -->
-  <section style="padding-top: 0; border-top: none;">
-    <div class="article-layout">
-      
-      <!-- BARRA LATERAL (Sidebar) -->
-      <aside class="article-sidebar">
-        
-        <div class="sidebar-block">
-          <span class="sidebar-label">Categoria</span>
-          <span id="artigoCategoria" class="sidebar-value" style="color: var(--accent);">—</span>
-        </div>
+  <!-- A Imagem de Capa Cinematográfica -->
+  <div class="wrap">
+    <img id="artigoImagem" class="editorial-cover" src="" alt="Capa">
+  </div>
 
-        <hr style="border: none; border-top: 1px solid var(--line); margin: 0;">
-
-        <div class="sidebar-block">
-          <span class="sidebar-label">Data</span>
-          <span id="artigoData" class="sidebar-value">—</span>
-        </div>
-
-        <hr style="border: none; border-top: 1px solid var(--line); margin: 0;">
-
-        <!-- Secção Dinâmica de Tags -->
-        <div class="sidebar-block">
-          <span class="sidebar-label">Palavras-chave</span>
-          <div id="artigoTags" style="margin-top: 5px;">
-            <span style="color: var(--muted); font-size: 13px;">Sem tags</span>
-          </div>
-        </div>
-
-        <hr style="border: none; border-top: 1px solid var(--line); margin: 0;">
-
-        <div class="sidebar-block">
-          <span class="sidebar-label">Ações</span>
-          <a href="caderno.html" class="btn" style="text-align: center; font-size: 13px; padding: 10px; margin-top: 5px;">Ver todos os artigos</a>
-        </div>
-      </aside>
-
-      <!-- CONTEÚDO DO ARTIGO -->
-      <article class="article-body">
-        
-        <!-- A Imagem de Capa injetada aqui -->
-        <img id="artigoImagem" class="article-cover" src="" alt="Capa do artigo">
-
-        <div id="artigoConteudo" style="font-size: 18px; line-height: 1.8; color: var(--text); display: flex; flex-direction: column; gap: 24px;">
-          <p style="color: var(--muted);">A ler o texto original...</p>
-        </div>
-      </article>
-
+  <!-- Corpo do Texto e Tags -->
+  <article class="editorial-container">
+    <div id="artigoConteudo" class="editorial-body">
+      <p style="text-align: center; color: var(--muted);">A ler o ficheiro...</p>
     </div>
-  </section>
+    
+    <div id="artigoTags" class="tag-container"></div>
+  </article>
 
 </main>
 
@@ -175,25 +158,22 @@
 
     if (!slug) {
       document.getElementById('artigoTitulo').innerText = "Artigo não encontrado";
-      document.getElementById('artigoConteudo').innerHTML = "<p>O link selecionado é inválido.</p>";
       return;
     }
 
     try {
       const response = await fetch(`content/caderno/${slug}.md`);
-      if (!response.ok) throw new Error('Ficheiro Markdown não encontrado');
+      if (!response.ok) throw new Error('Ficheiro não encontrado');
       
       const markdownText = await response.text();
       const partes = markdownText.split('---');
       let metadata = {};
       let conteudoMd = markdownText;
 
-      // O Novo Leitor Inteligente (Capaz de ler Arrays/Listas YAML)
       if (partes.length >= 3) {
         const frontmatter = partes[1].trim();
         conteudoMd = partes.slice(2).join('---').trim();
 
-        // Função rápida para extrair campos de texto normais
         const getMeta = (key) => {
           const regex = new RegExp(`^${key}:\\s*(.*)$`, 'mi');
           const match = frontmatter.match(regex);
@@ -205,58 +185,52 @@
         metadata.date = getMeta('date');
         metadata.image = getMeta('image');
 
-        // Lógica especial para ler as Tags (que são guardadas em lista)
         metadata.tags = [];
         let lendoTags = false;
         frontmatter.split('\n').forEach(linha => {
           const l = linha.trim();
           if (l.startsWith('tags:')) {
             lendoTags = true;
-            // Caso o Decap grave num array na mesma linha: tags: [Um, Dois]
             const inlineMatch = l.match(/\[(.*?)\]/);
             if (inlineMatch) {
               metadata.tags = inlineMatch[1].split(',').map(t => t.trim().replace(/['"]/g, ''));
               lendoTags = false;
             }
           } else if (lendoTags && l.startsWith('-')) {
-            // Caso grave em lista vertical: - Um \n - Dois
             metadata.tags.push(l.replace('-', '').trim().replace(/['"]/g, ''));
           } else if (lendoTags && l !== '' && !l.startsWith('-')) {
-            lendoTags = false; // Acabaram as tags
+            lendoTags = false;
           }
         });
       }
 
-      // 1. Preencher Textos Básicos
-      document.getElementById('pageTitle').innerText = `${metadata.title || 'Artigo'} — NEHS`;
+      document.getElementById('pageTitle').innerText = `${metadata.title || 'Artigo'} — André Rodrigues`;
       document.getElementById('artigoTitulo').innerText = metadata.title || 'Sem Título';
-      document.getElementById('artigoCategoria').innerText = metadata.categoria || 'Geral';
-      document.getElementById('artigoData').innerText = metadata.date || 'Data Indisponível';
+      document.getElementById('artigoCategoria').innerText = metadata.categoria || 'Artigo';
+      document.getElementById('artigoData').innerText = metadata.date || '';
       
-      // 2. Processar e Desenhar as Tags
-      const tagsContainer = document.getElementById('artigoTags');
-      if (metadata.tags && metadata.tags.length > 0) {
-        tagsContainer.innerHTML = metadata.tags.map(tag => `<span class="tag-badge">#${tag}</span>`).join('');
-      }
-
-      // 3. Processar Imagem de Capa
       if (metadata.image) {
         const imgElement = document.getElementById('artigoImagem');
         imgElement.src = metadata.image;
-        imgElement.style.display = 'block'; // Mostra a imagem se ela existir
+        imgElement.style.display = 'block';
       }
 
-      // 4. Injetar Conteúdo
+      if (metadata.tags && metadata.tags.length > 0) {
+        document.getElementById('artigoTags').innerHTML = metadata.tags.map(tag => `<span class="tag-badge">#${tag}</span>`).join('');
+      }
+
       const paragrafosHTML = conteudoMd.split('\n\n').map(p => {
-        // Ignora parágrafos vazios para não criar espaçamento extra
-        return p.trim() ? `<p>${p}</p>` : '';
+        if (!p.trim()) return '';
+        // Converte > em blockquotes reais para design
+        if (p.trim().startsWith('>')) return `<blockquote>${p.replace('>', '').trim()}</blockquote>`;
+        return `<p>${p}</p>`;
       }).join('');
       
       document.getElementById('artigoConteudo').innerHTML = paragrafosHTML;
 
     } catch (error) {
       document.getElementById('artigoTitulo').innerText = "Artigo Indisponível";
-      document.getElementById('artigoConteudo').innerHTML = "<p style='color: var(--muted);'>Ocorreu um erro ao carregar o texto. O artigo pode ter sido movido ou guardado como rascunho.</p>";
+      document.getElementById('artigoConteudo').innerHTML = "<p style='text-align:center;'>O artigo encontra-se em modo rascunho ou não existe.</p>";
     }
   });
 </script>
