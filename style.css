@@ -226,3 +226,57 @@ body.focus-mode main { transform: scale(1.02); transition: 0.5s ease; }
 .nav-search-trigger { background: transparent; border: none; color: var(--text); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 8px 10px; font-size: 16px; transition: 0.2s; }
 .nav-search-trigger:hover { color: var(--accent); transform: scale(1.1); }
 
+/* ========================================== */
+/*     RESPONSIVIDADE (TELEMÓVEIS E TABLETS)  */
+/* ========================================== */
+
+@media (max-width: 768px) {
+  /* 1. Reduzir as margens gigantes */
+  .hero {
+    padding: 50px 0 40px 0;
+    text-align: center; /* Centrar o texto principal */
+  }
+  
+  .hero.short {
+    padding: 40px 0 20px 0;
+  }
+  
+  section {
+    padding: 50px 0;
+  }
+
+  /* 2. Orbes mais pequenas para não criar barra de deslize horizontal */
+  .orb {
+    width: 300px;
+    height: 300px;
+    top: 0;
+  }
+
+  /* 3. Ajustar o tamanho da letra principal */
+  h1 {
+    font-size: 2.5rem !important;
+  }
+
+  /* 4. Os botões empilham-se uns nos outros e ocupam a largura total */
+  .hero div[style*="display: flex"] {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 12px !important;
+  }
+  
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* 5. Cartões e Propostas com menos margem interna */
+  .project {
+    padding: 25px 20px;
+  }
+
+  /* 6. Desativar o cursor magnético (telemóveis não têm rato e ele bloqueia o ecrã) */
+  .custom-cursor {
+    display: none !important;
+  }
+}
