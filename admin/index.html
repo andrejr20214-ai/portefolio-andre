@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Controlo — Back Office</title>
+  <link href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Configuração explícita para forçar o CMS a ler o config.yml local -->
+  <script>
+    window.CMS_MANUAL_INIT = true;
+  </script>
+
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <script>
+    // Inicialização manual a apontar diretamente para o ficheiro config.yml na mesma pasta
+    CMS.init({
+      config: {
+        backend: {
+          name: 'git-gateway',
+          branch: 'main'
+        },
+        local_backend: true,
+        media_folder: 'images',
+        public_folder: '/images',
+        collections: [
+          {
+            name: 'caderno',
+            label: 'O Caderno',
+            folder: 'content/caderno',
+            create: true,
+            slug: '{{slug}}',
+            fields: [
+              { label: 'Título', name: 'title', widget: 'string' },
+              { label: 'Data', name: 'date', widget: 'date', format: 'YYYY-MM-DD' },
+              { label: 'Categoria', name: 'categoria', widget: 'string' },
+              { label: 'Resumo', name: 'resumo', widget: 'text' },
+              { label: 'Conteúdo', name: 'body', widget: 'markdown' }
+            ]
+          }
+        ]
+      }
+    });
+  </script>
+</body>
+</html>
